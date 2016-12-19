@@ -7,7 +7,7 @@ from multiprocessing.dummy import Pool
 
 from django.conf import settings
 from django.contrib.staticfiles.management.commands import collectstatic
-from django.core.cache import caches
+from django.core.cache import cache as default_cache
 from django.utils.encoding import smart_str
 
 
@@ -17,7 +17,7 @@ except ImportError:
     _input = raw_input  # noqa
 
 collectfast_cache = getattr(settings, "COLLECTFAST_CACHE", "default")
-cache = caches[collectfast_cache]
+cache = default_cache
 debug = getattr(
     settings, "COLLECTFAST_DEBUG", getattr(settings, "DEBUG", False))
 threads = getattr(settings, "COLLECTFAST_THREADS", False)
